@@ -249,10 +249,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uf1-4f-sAm">
                                 <rect key="frame" x="0.0" y="199" width="704" height="203"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLP-47-lef">
-                                        <rect key="frame" x="22" y="51" width="165" height="137"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLP-47-lef">
+                                        <rect key="frame" x="22" y="51" width="223" height="137"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="165" id="DBJ-gL-gCs"/>
+                                            <constraint firstAttribute="width" constant="223" id="DBJ-gL-gCs"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="72"/>
                                         <color key="textColor" red="0.1647058824" green="0.17254901959999999" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
@@ -319,6 +319,7 @@
                         <outlet property="idBOX" destination="g3O-Jy-EoA" id="qMa-9U-LrP"/>
                         <outlet property="nameBox" destination="V61-Bc-UfI" id="Zpu-eo-cGF"/>
                         <outlet property="profileImage" destination="W0M-2z-PlL" id="6fr-VS-05M"/>
+                        <outlet property="riskBox" destination="BLP-47-lef" id="UcK-31-jDz"/>
                         <outlet property="sexBox" destination="PVr-VE-9tJ" id="V3o-K9-y8F"/>
                         <outlet property="tableView" destination="6xb-2F-8Gf" id="xWV-yU-pfw"/>
                     </connections>

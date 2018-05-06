@@ -68,7 +68,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var sexBox: UILabel!
     @IBOutlet weak var addressBox: UILabel!
     
-
+    @IBOutlet weak var riskBox: UILabel!
+    
     
     var detailItem: String!
     var patientName: String!
@@ -91,6 +92,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func fetchData(){
+    var mme = 1000
+        
     if((patientSeedName) != nil){
     profileImage.image = UIImage(named: patientSeedName)
     Alamofire.request("https://ohpioid-blurjoe.c9users.io:8081/api/query?queryParam=\(patientSeedName!)", method: .get).validate().responseJSON { response in
@@ -99,6 +102,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let json = JSON(value)
     //print("JSON: \(json)")
     for (key,subJson):(String, JSON) in json {
+        mme = mme + 100
     print(subJson)
     let id = subJson["id"].string!
     let quantity = subJson["data"]["assetdata"]["prescription"]["quantity"].int!
@@ -117,7 +121,20 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     }
     print(patientSeedName)
-    
+        
+        Alamofire.request("https://ohpioid-blurjoe.c9users.io:8081/api/getRiskNew?mme=\(mme)").responseString { response in
+            print("Result: \(response.result)")                         // response serialization result
+            
+            if let json = response.result.value {
+                print("JSON: \(json)") // serialized json response
+            }
+            
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data: \(utf8Text)") // original server data as UTF8 string
+                self.riskBox.text = "\(utf8Text)%"
+            }
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
