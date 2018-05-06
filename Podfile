@@ -9,7 +9,7 @@ target 'Ohpioid' do
 
   pod 'Alamofire', '~> 4.7'
   pod 'Eureka'
-
+  pod 'SwiftyJSON', '~> 4.0'
   target 'OhpioidTests' do
     inherit! :search_paths
     # Pods for testing
