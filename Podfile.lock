@@ -1,0 +1,15 @@
+PODS:
+  - Alamofire (4.7.1)
+  - Eureka (4.1.1)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.7)
+  - Eureka
+
+SPEC CHECKSUMS:
+  Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
+  Eureka: b88fb930e42c79f8c03c373d0fcdc28c1d6c50ed
+
+PODFILE CHECKSUM: 2dcda80ff99e633f4708e7ebec7dd13a425bd27a
+
+COCOAPODS: 1.4.0

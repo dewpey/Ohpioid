@@ -8,14 +8,54 @@
 
 import UIKit
 
+public class Patient{
+    var name: String!
+    var address: String!
+    var seedName: String!
+    var sex: String!
+    var DOB: String!
+    var ID: String!
+    init (_name: String, _address: String, _seedName: String, _sex: String, _DOB: String, _ID: String) {
+        name = _name
+        address = _address
+        seedName = _seedName
+        sex = _sex
+        DOB = _DOB
+        ID = _ID
+    }
+    
+    
+}
+
 class MasterViewController: UITableViewController {
 
+    
+    
     var detailViewController: DetailViewController? = nil
-    var objects = [Any]()
+    var objects = [Any]();
 
+    
+    
+    let _alicia = Patient(_name: "Alicia",_address: "123 Somewhere Ave", _seedName: "alicia", _sex: "Female", _DOB: "12 December, 2017", _ID: "ABC123");
+    let _baron = Patient(_name: "Baron",_address: "123 Somewhere Ave", _seedName: "baron", _sex: "Male", _DOB: "12 December, 2017", _ID: "ABC123");
+    let _charles = Patient(_name: "Charles",_address: "123 Somewhere Ave", _seedName: "charles", _sex: "Male", _DOB: "12 December, 2017", _ID: "ABC123");
+    let _danica = Patient(_name: "Danica",_address: "123 Somewhere Ave", _seedName: "danica", _sex: "Female", _DOB: "12 December, 2017", _ID: "ABC123");
+    
+    var patients = [Patient]();
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        patients.append(_alicia)
+        patients.append(_baron)
+        patients.append(_charles)
+        patients.append(_danica)
+        
+        print(patients[0].name)
+        tableView.reloadData()
+        
         // Do any additional setup after loading the view, typically from a nib.
         navigationItem.leftBarButtonItem = editButtonItem
 
@@ -49,9 +89,16 @@ class MasterViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let object = objects[indexPath.row] as! NSDate
+                let object = patients[indexPath.row].name as! String
+                let patientObject = patients[indexPath.row] as! Patient
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = object
+                controller.patientName = patients[indexPath.row].name as! String
+                controller.patientAddress = patients[indexPath.row].address as! String
+                controller.patientDOB = patients[indexPath.row].DOB as! String
+                controller.patientID = patients[indexPath.row].ID as! String
+                controller.patientSeedName = patients[indexPath.row].seedName as! String
+                controller.patientSex = patients[indexPath.row].sex as! String
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
@@ -65,14 +112,14 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return patients.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        let object = objects[indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
+        //let object = patien[indexPath.row] as! NSDate
+        cell.textLabel!.text = patients[indexPath.row].name
         return cell
     }
 
