@@ -36,7 +36,7 @@ class MasterViewController: UITableViewController {
 
     
     
-    let _alicia = Patient(_name: "Alicia Keys",_address: "123 Somewhere Ave", _seedName: "alicia", _sex: "Female", _DOB: "12 December, 2017", _ID: "ABC123");
+    let _alicia = Patient(_name: "Alicia Keys",_address: "1300 6th Ave S, Birmingham, AL", _seedName: "alicia", _sex: "Female", _DOB: "12 December, 1998", _ID: "ABC123");
     let _baron = Patient(_name: "Baron Rivendale",_address: "123 Somewhere Ave", _seedName: "bar0n", _sex: "Male", _DOB: "12 December, 2017", _ID: "ABC123");
     let _charles = Patient(_name: "Charles Inglum",_address: "123 Somewhere Ave", _seedName: "charles", _sex: "Male", _DOB: "12 December, 2017", _ID: "ABC123");
     let _danica = Patient(_name: "Danica Patrick",_address: "123 Somewhere Ave", _seedName: "danica", _sex: "Female", _DOB: "12 December, 2017", _ID: "ABC123");

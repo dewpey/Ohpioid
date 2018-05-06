@@ -20,21 +20,21 @@ class createPrescriptionVC: FormViewController {
         form +++ Section("Details")
             <<< TextRow("RXName"){ row in
                 row.title = "Prescription Name"
-                row.placeholder = "Fentantyl"
+                row.value = "Fentantyl"
             }
             <<< IntRow("Quantity"){
                 $0.title = "Quantity"
-                $0.placeholder = "100"
+                $0.value = 100
             }
         
             <<< TextAreaRow("Directions"){
                 $0.title = "Directions"
-                $0.placeholder = "Take once daily after breakfast."
+                $0.value = "Take once daily after breakfast."
             }
         
             <<< TextRow("Pharmacy"){
                 $0.title = "Pharmacy"
-                $0.placeholder = "Barnes Jewish Pharmacy"
+                $0.value = "Barnes Jewish Pharmacy"
         }
         
         
@@ -66,11 +66,12 @@ class createPrescriptionVC: FormViewController {
             case .success(let value):
                 print(value)
                 
+                
             case .failure(let error):
                 print(error)
             }
             
-            
+            self.dismiss(animated: true, completion: nil)
         }
         
         

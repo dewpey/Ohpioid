@@ -50,6 +50,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //let object = patien[indexPath.row] as! NSDate
         if(prescriptions.count>0){
         cell.transactionBox!.text = prescriptions[indexPath.row].id
+        cell.titleBox!.text = prescriptions[indexPath.row].rxName
+        cell.directionsBox!.text = prescriptions[indexPath.row].directions
+        cell.amountBox!.text = String(prescriptions[indexPath.row].quantity)
+            
         }else{
         cell.transactionBox!.text = "placeholder"
         }
@@ -103,6 +107,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //print("JSON: \(json)")
     for (key,subJson):(String, JSON) in json {
         mme = mme + 100
+        print(mme)
     print(subJson)
     let id = subJson["id"].string!
     let quantity = subJson["data"]["assetdata"]["prescription"]["quantity"].int!
@@ -112,7 +117,21 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let newPre = Prescription(_directions: directions, _rxName: rxName, _pharmacy: pharmacy, _quantity: quantity, _id: id)
     //let newPre = Prescription(_directions: "directions", _rxName: "rxName", _pharmacy: "pharmacy", _quantity: 100, _id: id)
     self.prescriptions.append(newPre)
+    }
+    print(self.patientSeedName)
     
+    print(self.prescriptions.count)
+    Alamofire.request("https://ohpioid-blurjoe.c9users.io:8081/api/getRiskNew?mme=\(self.prescriptions.count)").responseString { response in
+        print("Result: \(response.result)")                         // response serialization result
+        
+        if let json = response.result.value {
+            print("JSON: \(json)") // serialized json response
+        }
+        
+        if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+            print("Data: \(utf8Text)") // original server data as UTF8 string
+            self.riskBox.text = "\(utf8Text)%"
+        }
     }
     self.tableView.reloadData()
     case .failure(let error):
@@ -120,20 +139,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     }
     }
-    print(patientSeedName)
-        
-        Alamofire.request("https://ohpioid-blurjoe.c9users.io:8081/api/getRiskNew?mme=\(mme)").responseString { response in
-            print("Result: \(response.result)")                         // response serialization result
-            
-            if let json = response.result.value {
-                print("JSON: \(json)") // serialized json response
-            }
-            
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)") // original server data as UTF8 string
-                self.riskBox.text = "\(utf8Text)%"
-            }
-        }
+   
         
     }
     
