@@ -86,44 +86,54 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 sexBox.text = patientSex
                 addressBox.text = patientAddress
                 print(patientSeedName)
-        if((patientSeedName) != nil){
-                profileImage.image = UIImage(named: patientSeedName)
-            Alamofire.request("https://ohpioid-blurjoe.c9users.io:8081/api/query?queryParam=\(patientSeedName!)", method: .get).validate().responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    //print("JSON: \(json)")
-                    for (key,subJson):(String, JSON) in json {
-                        print(subJson["data"]["assetdata"]["prescription"])
-                        let id = subJson["id"].string!
-                        //let quantity = subJson["data"]["params"]["quantity"].int!
-                        //let directions = subJson["data"]["params"]["directions"].string!
-                        //let rxName = subJson["data"]["params"]["rxName"].string!
-                        //let pharmacy = subJson["data"]["params"]["pharmacy"].string!
-                        //let newPre = Prescription(_directions: directions, _rxName: rxName, _pharmacy: pharmacy, _quantity: quantity, _id: id)
-                        let newPre = Prescription(_directions: "directions", _rxName: "rxName", _pharmacy: "pharmacy", _quantity: 100, _id: id)
-                        self.prescriptions.append(newPre)
-                        
-                    }
-                    self.tableView.reloadData()
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
-        print(patientSeedName)
-        
+                fetchData()
        
     }
 
-   
+    func fetchData(){
+    if((patientSeedName) != nil){
+    profileImage.image = UIImage(named: patientSeedName)
+    Alamofire.request("https://ohpioid-blurjoe.c9users.io:8081/api/query?queryParam=\(patientSeedName!)", method: .get).validate().responseJSON { response in
+    switch response.result {
+    case .success(let value):
+    let json = JSON(value)
+    //print("JSON: \(json)")
+    for (key,subJson):(String, JSON) in json {
+    print(subJson)
+    let id = subJson["id"].string!
+    let quantity = subJson["data"]["assetdata"]["prescription"]["quantity"].int!
+    let directions = subJson["data"]["assetdata"]["prescription"]["directions"].string!
+    let rxName = subJson["data"]["assetdata"]["prescription"]["rxName"].string!
+    let pharmacy = subJson["data"]["assetdata"]["prescription"]["pharmacy"].string!
+    let newPre = Prescription(_directions: directions, _rxName: rxName, _pharmacy: pharmacy, _quantity: quantity, _id: id)
+    //let newPre = Prescription(_directions: "directions", _rxName: "rxName", _pharmacy: "pharmacy", _quantity: 100, _id: id)
+    self.prescriptions.append(newPre)
+    
+    }
+    self.tableView.reloadData()
+    case .failure(let error):
+    print(error)
+    }
+    }
+    }
+    print(patientSeedName)
+    
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        configureView()
+        
+        
+        super.viewWillAppear(animated) // No need for semicolon
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        configureView()
+        
         
     }
 

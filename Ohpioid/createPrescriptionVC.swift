@@ -17,7 +17,7 @@ class createPrescriptionVC: FormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        form +++ Section("Section1")
+        form +++ Section("Details")
             <<< TextRow("RXName"){ row in
                 row.title = "Prescription Name"
                 row.placeholder = "Fentantyl"
